@@ -7,7 +7,10 @@ type LeadPayload = {
   [key: string]: string;
 };
 
-const REQUIRED_FIELDS = ["formType", "name", "phone"];
+const REQUIRED_FIELDS_BY_TYPE: Record<string, string[]> = {
+  "container-quote": ["formType", "name", "email"],
+  "conversion-inquiry": ["formType", "name", "phone"],
+};
 
 export async function POST(request: NextRequest) {
   let payload: LeadPayload;
@@ -17,7 +20,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
   }
 
-  const missing = REQUIRED_FIELDS.filter((field) => !payload[field]);
+  const requiredFields = REQUIRED_FIELDS_BY_TYPE[payload.formType] || ["formType", "name"];
+  const missing = requiredFields.filter((field) => !payload[field]);
   if (missing.length > 0) {
     return NextResponse.json(
       { error: `Missing required field(s): ${missing.join(", ")}` },

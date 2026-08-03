@@ -19,7 +19,6 @@ const perks = [
 type Status = "idle" | "submitting" | "success" | "error";
 
 export default function SizeSelector() {
-  const [selectedSize, setSelectedSize] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -38,9 +37,9 @@ export default function SizeSelector() {
         body: JSON.stringify({
           formType: "container-quote",
           name: data.get("name"),
+          email: data.get("email"),
           phone: data.get("phone"),
-          zip: data.get("zip"),
-          size: data.get("size"),
+          message: data.get("message"),
         }),
       });
 
@@ -51,7 +50,6 @@ export default function SizeSelector() {
 
       setStatus("success");
       form.reset();
-      setSelectedSize("");
     } catch (err) {
       setStatus("error");
       setErrorMessage(err instanceof Error ? err.message : "Something went wrong");
@@ -70,21 +68,15 @@ export default function SizeSelector() {
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {sizes.map((s) => (
-            <button
+            <div
               key={s.size}
-              type="button"
-              onClick={() => setSelectedSize(s.size)}
-              className={`rounded-md border p-5 text-left transition ${
-                selectedSize === s.size
-                  ? "border-amber-500 bg-steel-950"
-                  : "border-steel-700 bg-steel-950 hover:border-amber-500/70"
-              }`}
+              className="rounded-md border border-steel-700 bg-steel-950 p-5"
             >
               <p className="font-display text-xl font-semibold text-bone">
                 {s.size}
               </p>
               <p className="mt-1 text-xs text-steel-400">{s.use}</p>
-            </button>
+            </div>
           ))}
         </div>
 
@@ -119,35 +111,30 @@ export default function SizeSelector() {
                 className="w-full rounded-sm border border-steel-600 bg-steel-900 px-3 py-2.5 text-sm text-bone placeholder:text-steel-400 focus:border-amber-500 focus:outline-none"
               />
               <input
-                type="tel"
-                name="phone"
+                type="email"
+                name="email"
                 required
-                placeholder="Phone number"
+                placeholder="Email"
                 className="w-full rounded-sm border border-steel-600 bg-steel-900 px-3 py-2.5 text-sm text-bone placeholder:text-steel-400 focus:border-amber-500 focus:outline-none"
               />
               <input
-                type="text"
-                name="zip"
-                required
-                placeholder="Zip code"
+                type="tel"
+                name="phone"
+                placeholder="Phone number (optional)"
                 className="w-full rounded-sm border border-steel-600 bg-steel-900 px-3 py-2.5 text-sm text-bone placeholder:text-steel-400 focus:border-amber-500 focus:outline-none"
               />
-              <select
-                name="size"
-                required
-                value={selectedSize}
-                onChange={(e) => setSelectedSize(e.target.value)}
-                className="w-full rounded-sm border border-steel-600 bg-steel-900 px-3 py-2.5 text-sm text-steel-300 focus:border-amber-500 focus:outline-none"
-              >
-                <option value="" disabled>
-                  Container size
-                </option>
-                {sizes.map((s) => (
-                  <option key={s.size} value={s.size}>
-                    {s.size}
-                  </option>
-                ))}
-              </select>
+              <div>
+                <textarea
+                  name="message"
+                  required
+                  rows={3}
+                  placeholder="Message"
+                  className="w-full rounded-sm border border-steel-600 bg-steel-900 px-3 py-2.5 text-sm text-bone placeholder:text-steel-400 focus:border-amber-500 focus:outline-none"
+                />
+                <p className="mt-1 text-xs text-steel-400">
+                  What would you like to discuss?
+                </p>
+              </div>
               <button
                 type="submit"
                 disabled={status === "submitting"}

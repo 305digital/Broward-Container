@@ -15,7 +15,7 @@ export default function Footer() {
           <p className="font-mono text-xs uppercase tracking-wide text-steel-500">
             Contact
           </p>
-          <p className="mt-2 text-sm text-steel-200">(605) 613-9378</p>
+          <p className="mt-2 text-sm text-steel-200">(305) 613-9378</p>
           <p className="mt-1 text-sm text-steel-200">browardintlcontainers@gmail.com</p>
         </div>
 

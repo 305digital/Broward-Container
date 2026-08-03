@@ -28,10 +28,10 @@ export default function Header() {
         </nav>
 
         <a
-          href="tel:+16056139378"
+          href="tel:+13056139378"
           className="hidden rounded-sm bg-amber-500 px-4 py-2 font-display text-sm font-semibold tracking-wide text-steel-950 transition hover:bg-amber-400 md:inline-block"
         >
-          (605) 613-9378
+          (305) 613-9378
         </a>
       </div>
     </header>

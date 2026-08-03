@@ -46,7 +46,7 @@ No secrets are hardcoded anywhere in the codebase.
 
 ## Placeholder content to swap out before launch
 
-- Phone (`(605) 613-9378`) and email (`browardintlcontainers@gmail.com`) are
+- Phone (`(305) 613-9378`) and email (`browardintlcontainers@gmail.com`) are
   set to real values in Header, StickyContactBar, and Footer
 - Conversion project videos in `components/Conversions.tsx` — currently a
   placeholder card with a play icon; swap for an embedded YouTube/Vimeo
