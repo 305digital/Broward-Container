@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, FormEvent } from "react";
 
 const processSteps = [
@@ -9,10 +10,16 @@ const processSteps = [
   { step: "04", title: "Deliver", desc: "Transported and set on-site, ready to use." },
 ];
 
-const projects = [
-  { title: "Backyard studio office", type: "320 sq ft" },
-  { title: "Roadside coffee kiosk", type: "160 sq ft" },
-  { title: "Two-container home", type: "640 sq ft" },
+type Project =
+  | { title: string; media: "image"; src: string }
+  | { title: string; media: "video"; src: string }
+  | { title: string; media: "placeholder" };
+
+const projects: Project[] = [
+  { title: "Two-story container office", media: "image", src: "/images/2-story-office.jpg" },
+  { title: "Container bar & event space", media: "image", src: "/images/conversion-bar.jpg" },
+  { title: "Backyard container studio", media: "image", src: "/images/conversion-front.jpg" },
+  { title: "Interior walkthrough", media: "video", src: "/videos/conversion-interior.mp4" },
 ];
 
 const pricing = [
@@ -73,25 +80,44 @@ export default function Conversions() {
           Built for how you&rsquo;ll actually use it
         </h2>
 
-        {/* Portfolio - video placeholders */}
-        <div className="mt-9 grid gap-4 sm:grid-cols-3">
+        {/* Portfolio - real project photos/video where we have them, placeholder otherwise */}
+        <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {projects.map((p) => (
             <div key={p.title} className="overflow-hidden rounded-md border border-steel-700 bg-steel-900">
-              <div className="flex aspect-video items-center justify-center border-b border-steel-700 bg-steel-800">
-                <div className="flex flex-col items-center gap-2 text-steel-400">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full border border-steel-600">
-                    &#9654;
-                  </span>
-                  <span className="font-mono text-[10px] uppercase tracking-wide">
-                    Video coming soon
-                  </span>
-                </div>
+              <div className="relative aspect-video border-b border-steel-700 bg-steel-800">
+                {p.media === "image" && (
+                  <Image
+                    src={p.src}
+                    alt={p.title}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover"
+                  />
+                )}
+                {p.media === "video" && (
+                  <video
+                    src={p.src}
+                    controls
+                    className="h-full w-full object-cover"
+                  />
+                )}
+                {p.media === "placeholder" && (
+                  <div className="flex h-full items-center justify-center">
+                    <div className="flex flex-col items-center gap-2 text-steel-400">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-full border border-steel-600">
+                        &#9654;
+                      </span>
+                      <span className="font-mono text-[10px] uppercase tracking-wide">
+                        Video coming soon
+                      </span>
+                    </div>
+                  </div>
+                )}
               </div>
               <div className="p-4">
                 <p className="font-display text-sm font-semibold text-bone">
                   {p.title}
                 </p>
-                <p className="mt-0.5 text-xs text-steel-400">{p.type}</p>
               </div>
             </div>
           ))}
