@@ -67,7 +67,7 @@ async function sendViaResend(subject: string, text: string) {
     },
     body: JSON.stringify({
       from: process.env.LEAD_FROM_EMAIL || "leads@example.com",
-      to: process.env.LEAD_TO_EMAIL || "hello@browardinternationalcontainers.com",
+      to: process.env.LEAD_TO_EMAIL || "browardintlcontainers@gmail.com",
       subject,
       text,
     }),
