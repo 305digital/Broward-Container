@@ -11,15 +11,19 @@ const processSteps = [
 ];
 
 type Project =
-  | { title: string; media: "image"; src: string }
-  | { title: string; media: "video"; src: string }
-  | { title: string; media: "placeholder" };
+  | { title: string; media: "image"; src: string; tag?: string }
+  | { title: string; media: "video"; src: string; tag?: string }
+  | { title: string; media: "placeholder"; tag?: string };
 
 const projects: Project[] = [
   { title: "Two-story container office", media: "image", src: "/images/2-story-office.jpg" },
   { title: "Container bar & event space", media: "image", src: "/images/conversion-bar.jpg" },
   { title: "Backyard container studio", media: "image", src: "/images/conversion-front.jpg" },
+  { title: "Glass-front office pod", media: "image", src: "/images/conversion-office-pod.jpg" },
+  { title: "Compact container office", media: "image", src: "/images/conversion-yard-build.jpg" },
   { title: "Interior walkthrough", media: "video", src: "/videos/conversion-interior.mp4" },
+  { title: "Container pool", media: "image", src: "/images/conversion-pool-render.jpg", tag: "Concept render" },
+  { title: "Container pool — overhead", media: "image", src: "/images/conversion-pool-render-above.jpg", tag: "Concept render" },
 ];
 
 const pricing = [
@@ -85,6 +89,11 @@ export default function Conversions() {
           {projects.map((p) => (
             <div key={p.title} className="overflow-hidden rounded-md border border-steel-700 bg-steel-900">
               <div className="relative aspect-video border-b border-steel-700 bg-steel-800">
+                {p.tag && (
+                  <span className="absolute right-2 top-2 z-10 rounded-sm bg-steel-950/85 px-2 py-1 font-mono text-[10px] uppercase tracking-wide text-amber-400">
+                    {p.tag}
+                  </span>
+                )}
                 {p.media === "image" && (
                   <Image
                     src={p.src}
