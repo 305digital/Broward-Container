@@ -11,8 +11,8 @@ const sizes = [
 
 const perks = [
   "Every container inspected before sale",
-  "Delivery to your site included",
-  "Warranty on every unit",
+  "Delivery available based on distance",
+  "Export services available",
   "New, used & one-trip options",
 ];
 
