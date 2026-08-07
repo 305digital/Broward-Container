@@ -30,7 +30,6 @@ const pricing = [
   { type: "Office pod", range: "$18k – $32k" },
   { type: "Cafe / kiosk", range: "$25k – $45k" },
   { type: "Studio / ADU", range: "$45k – $85k" },
-  { type: "Full home", range: "$90k+" },
 ];
 
 type Status = "idle" | "submitting" | "success" | "error";

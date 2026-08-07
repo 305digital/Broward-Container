@@ -12,7 +12,7 @@ const sizes = [
 const perks = [
   "Every container inspected before sale",
   "Delivery available based on distance",
-  "Export services available",
+  "We deliver to the Caribbean",
   "New, used & one-trip options",
 ];
 
@@ -93,6 +93,19 @@ export default function SizeSelector() {
                 </li>
               ))}
             </ul>
+
+            <div className="mt-6 rounded-md border border-amber-500/60 bg-steel-950 p-4">
+              <p className="text-sm text-bone">
+                Before you buy anywhere else, call us — we can beat 99% of
+                our competitors&rsquo; prices.
+              </p>
+              <a
+                href="tel:+13056139378"
+                className="mt-2 inline-block font-display text-sm font-semibold tracking-wide text-amber-400 hover:text-amber-300"
+              >
+                (305) 613-9378 &rarr;
+              </a>
+            </div>
           </div>
 
           <form onSubmit={handleSubmit} className="rounded-md border border-steel-700 bg-steel-950 p-6">
