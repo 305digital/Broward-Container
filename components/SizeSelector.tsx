@@ -16,6 +16,13 @@ const perks = [
   "New, used & one-trip options",
 ];
 
+const promotions = [
+  { item: "40' HC — 1 trip", price: "$4,200" },
+  { item: "20' ST double door — 1 trip", price: "$6,000" },
+  { item: "40' HC — cargo", price: "$2,200" },
+  { item: "20' — cargo", price: "$1,800" },
+];
+
 type Status = "idle" | "submitting" | "success" | "error";
 
 export default function SizeSelector() {
@@ -78,6 +85,31 @@ export default function SizeSelector() {
               <p className="mt-1 text-xs text-steel-400">{s.use}</p>
             </div>
           ))}
+        </div>
+
+        <div className="mt-10 rounded-md border border-amber-500/60 bg-steel-950 p-6">
+          <p className="font-mono text-xs uppercase tracking-wide text-amber-400">
+            Limited-time pricing
+          </p>
+          <h3 className="mt-1 font-display text-xl font-semibold text-bone">
+            Current container promotions
+          </h3>
+          <div className="mt-4 divide-y divide-steel-700 border-t border-steel-700">
+            {promotions.map((p) => (
+              <div
+                key={p.item}
+                className="flex items-center justify-between py-3"
+              >
+                <span className="text-sm text-steel-200">{p.item}</span>
+                <span className="font-mono text-sm text-amber-400">
+                  {p.price}
+                </span>
+              </div>
+            ))}
+          </div>
+          <p className="mt-3 text-xs text-steel-400">
+            Pricing subject to availability — call to confirm before you buy.
+          </p>
         </div>
 
         <div id="why-us" className="mt-14 grid gap-8 md:grid-cols-2 md:items-center">
